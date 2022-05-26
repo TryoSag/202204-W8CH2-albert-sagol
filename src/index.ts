@@ -4,3 +4,5 @@ const createRoboto = (type: Type): IRobot => {
   const newRoboto = new Robot(type);
   return newRoboto;
 };
+
+const Alfredo = createRoboto("Cleaner");

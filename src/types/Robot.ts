@@ -1,5 +1,3 @@
-import { generateKey } from "crypto";
-
 export type Type = "Cleaner" | "Waiter" | "Developer";
 
 export interface IRobot {
