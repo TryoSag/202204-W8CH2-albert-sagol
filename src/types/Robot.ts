@@ -1,47 +1,53 @@
 export type Type = "Cleaner" | "Waiter" | "Developer";
 
-export interface IRobot {
+interface IRobot {
   name: string;
   battery: number;
   type: Type;
   reset: () => void;
   work: () => void;
 }
+
 export class Robot implements IRobot {
-  battery;
-  name;
+  battery: number;
+  name: string;
   timerId: NodeJS.Timer;
 
   constructor(public type: Type) {
-    this.battery = 100;
-    this.name = this.generateName();
-    this.lowBattery();
+    this.reset();
   }
+
   reset() {
+    clearInterval(this.timerId);
     this.battery = 100;
     this.name = this.generateName();
-    clearInterval(this.timerId);
     this.lowBattery();
   }
+
   work() {
-    if (this.battery > 0) {
-      let message: string;
-      switch (this.type) {
-        case "Cleaner":
-          message = "Larala larita, I clean my little house";
-          break;
-        case "Waiter":
-          message = "Do you feel like a mini of fuet?";
-          break;
-        case "Developer":
-          message =
-            "JavaScript is cool - I develop with JavaScript -> I'm cool";
-          break;
-        default:
-          message = "";
-      }
-      console.log(message);
+    if (this.battery === 0) {
+      return;
     }
+
+    let message: string;
+
+    switch (this.type) {
+      case "Cleaner":
+        message = "Larala larita, I clean my little house";
+        break;
+
+      case "Waiter":
+        message = "Do you feel like a mini of fuet?";
+        break;
+
+      case "Developer":
+        message = "JavaScript is cool - I develop with JavaScript -> I'm cool";
+        break;
+
+      default:
+        message = "";
+    }
+    console.log(message);
   }
 
   generateName(): string {
